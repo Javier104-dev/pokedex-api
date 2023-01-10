@@ -50,10 +50,14 @@
     flex-direction: column;
     text-align: center;
     width: 15%;
-    background-color: #263238;
+    background-color: transparent;
     margin-top: 2rem;
     border-radius: 8px;
     box-shadow: 5px 5px 10px black;
+}
+
+.tarjeta__foto{
+    filter: drop-shadow(5px 5px 5px black); 
 }
 
 .tarjeta__nombre{
@@ -61,5 +65,8 @@
 }
 
 .tarjeta__detalles{
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
     margin: 0.5rem;
 }
