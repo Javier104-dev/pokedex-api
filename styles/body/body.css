@@ -52,6 +52,8 @@
     width: 15%;
     background-color: #263238;
     margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px black;
 }
 
 .tarjeta__nombre{
