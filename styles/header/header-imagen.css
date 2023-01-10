@@ -1,0 +1,9 @@
+.header{
+    display: flex;
+    justify-content: center;
+    background-color: #ef5350;
+}
+
+.header__imagen{
+    margin: 3rem 0;
+}
