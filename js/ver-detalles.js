@@ -3,10 +3,7 @@ import { pokemonServices } from "./services.js";
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");
 
-
-
 const crearDiv = (nombre, foto, altura, peso, tipo) =>{
-
     const div = document.createElement("div");
     div.classList.add("pokemon");
     const contenido =
@@ -16,6 +13,7 @@ const crearDiv = (nombre, foto, altura, peso, tipo) =>{
         <span class="pokemon__descripcion__item">Altura: ${altura}</span>
         <span class="pokemon__descripcion__item">Peso: ${peso}</span>
         <span class="pokemon__descripcion__item">Tipo: ${tipo}</span>
+        <span class="pokemon__descripcion__item">Habilidades:</span>
         <ul class="pokemon__descripcion__poder">
             
         </ul>
@@ -26,15 +24,23 @@ const crearDiv = (nombre, foto, altura, peso, tipo) =>{
     `;
 
     div.innerHTML = contenido;
+    const ulDiv = div.querySelector(".pokemon__descripcion__poder")
+    pokemonServices.obtenerDetallesPokemon(nombre).then((respuestaJson)=>{
+        const arrarHabilidades = respuestaJson.abilities;
+            arrarHabilidades.forEach((habilidad)=>{
+                const li = document.createElement("li");
+                li.textContent = habilidad.ability.name;
+                ulDiv.appendChild(li);
+            });
+    });
     return div;
-}
+};
 
 const detallesPokemones = async () =>{
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
 
     if(id === null){
-        console.log("crear pagina de error")
         return;
     }
 
@@ -47,22 +53,14 @@ const detallesPokemones = async () =>{
             const altura = pokemonSeleccionado.height;
             const peso = pokemonSeleccionado.weight
             const types = pokemonSeleccionado.types;
-            //const poderes = pokemonSeleccionado.abilities;
                 types.forEach((tipo)=>{
                     tipos.push(tipo.type.name);
                 });
                 const tiposString = tipos.join(", ");
-                /*
-                poderes.forEach(poder =>{
-                    const li = document.createElement("li");
-                    li.textContent = poder.ability.name;
-                    listadoPoderes.appendChild(li);
-                });
-                */
             const div = crearDiv(nombre, foto, altura, peso, tiposString);
             listado.remove();
             contenedorHtml.appendChild(div);
     }catch(error) {alert("Ocurrio un error")};
-}
+};
 
 detallesPokemones();
