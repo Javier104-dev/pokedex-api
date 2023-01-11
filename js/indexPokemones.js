@@ -20,7 +20,7 @@ const exponerPokemones = async () =>{
         const listaJSON = await pokemonServices.listaPokemones();
         const listaPokemones = listaJSON.results
         listaPokemones.forEach(({name}) => {
-            pokemonServices.obtenerImagen(name).then(({sprites})=>{
+            pokemonServices.obtenerDetallesPokemon(name).then(({sprites})=>{
                 const foto = sprites.front_default;
                 const nuevoDiv = crearDiv(name, foto);
                 divContenedorHTML.appendChild(nuevoDiv);
@@ -30,6 +30,3 @@ const exponerPokemones = async () =>{
 };
 
 exponerPokemones();
-
-
-
