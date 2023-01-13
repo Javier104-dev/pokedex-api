@@ -1,4 +1,4 @@
-import { pokemonServices } from "./services.js";
+import { listarPokemones, obtenerDetallesPokemon } from "./services.js";
 
 const crearDiv = (nombre, foto) =>{
     const div = document.createElement("div");
@@ -17,10 +17,10 @@ const divContenedorHTML = document.querySelector("[data-listado]");
 
 const exponerPokemones = async () =>{
     try{
-        const listaJSON = await pokemonServices.listaPokemones();
+        const listaJSON = await listarPokemones();
         const listaPokemones = listaJSON.results
         listaPokemones.forEach(({name}) => {
-            pokemonServices.obtenerDetallesPokemon(name).then(({sprites})=>{
+            obtenerDetallesPokemon(name).then(({sprites})=>{
                 const foto = sprites.front_default;
                 const nuevoDiv = crearDiv(name, foto);
                 divContenedorHTML.appendChild(nuevoDiv);

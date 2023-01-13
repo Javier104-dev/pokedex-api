@@ -1,4 +1,4 @@
-const listaPokemones = () => {
+const listarPokemones = () => {
     return fetch("https://pokeapi.co/api/v2/pokemon")
     .then(respuesta => respuesta.json())
 };
@@ -8,7 +8,7 @@ const obtenerDetallesPokemon = (pokemon) =>{
     .then(respuesta => respuesta.json())
 };
 
-export const pokemonServices = {
-    listaPokemones,
+export{
+    listarPokemones,
     obtenerDetallesPokemon,
 };

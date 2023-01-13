@@ -1,9 +1,9 @@
-import { pokemonServices } from "./services.js";
+import { obtenerDetallesPokemon } from "./services.js";
 
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");
 
-const detallesPokemones = async () =>{
+const detallarPokemones = async () =>{
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
 
@@ -12,7 +12,7 @@ const detallesPokemones = async () =>{
     }
 
     try{
-        const pokemonSeleccionado = await pokemonServices.obtenerDetallesPokemon(id);
+        const pokemonSeleccionado = await obtenerDetallesPokemon(id);
             let tipos = [];
 
             const nombre = pokemonSeleccionado.name;
@@ -30,7 +30,7 @@ const detallesPokemones = async () =>{
     }catch(error) {alert("Ocurrio un error")};
 };
 
-detallesPokemones();
+detallarPokemones();
 
 const crearDiv = (nombre, foto, altura, peso, tipo) =>{
     const div = document.createElement("div");
@@ -60,7 +60,7 @@ const crearDiv = (nombre, foto, altura, peso, tipo) =>{
 const obtenerPoderesPokemon = async (nombre, div) => {
     const ulDiv = div.querySelector(".pokemon__descripcion__poder");
     try{
-        const pokemonSeleccionado = await pokemonServices.obtenerDetallesPokemon(nombre);
+        const pokemonSeleccionado = await obtenerDetallesPokemon(nombre);
         const arrayHabilidades = pokemonSeleccionado.abilities;
             arrayHabilidades.forEach((habilidad)=>{
                 const li = document.createElement("li");
