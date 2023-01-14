@@ -70,3 +70,17 @@
     text-decoration: none;
     margin: 0.5rem;
 }
+
+/*******************************/
+
+.paginador{
+    text-align: center;
+    margin: 4rem 0rem 4rem 0rem;
+}
+
+.paginador__opcion{
+    background: red;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+}

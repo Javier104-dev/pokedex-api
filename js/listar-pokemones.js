@@ -13,20 +13,24 @@ const crearDiv = (nombre, foto) =>{
     return div;
 }
 
-const divContenedorHTML = document.querySelector("[data-listado]");
-
 const exponerPokemones = async () =>{
+    const divContenedorHTML = document.querySelector("[data-listado]");
+    const botonNext = document.querySelector("[data-btn-next]");
     try{
         const listaJSON = await listarPokemones();
+        botonNext.id = listaJSON.next;
         const listaPokemones = listaJSON.results
         listaPokemones.forEach(({name}) => {
+
             obtenerDetallesPokemon(name).then(({sprites})=>{
                 const foto = sprites.front_default;
                 const nuevoDiv = crearDiv(name, foto);
                 divContenedorHTML.appendChild(nuevoDiv);
             });
+            
         });
     }catch(error) {alert("Ocurrio un error")};
 };
 
 exponerPokemones();
+export{crearDiv};

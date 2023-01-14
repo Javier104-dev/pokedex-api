@@ -1,4 +1,4 @@
-import { obtenerDetallesPokemon } from "./services.js";
+import { obtenerDetallesPokemon} from "./services.js";
 
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");
@@ -62,10 +62,10 @@ const obtenerPoderesPokemon = async (nombre, div) => {
     try{
         const pokemonSeleccionado = await obtenerDetallesPokemon(nombre);
         const arrayHabilidades = pokemonSeleccionado.abilities;
-            arrayHabilidades.forEach((habilidad)=>{
-                const li = document.createElement("li");
-                li.textContent = habilidad.ability.name;
-                ulDiv.appendChild(li);
-            });
+        arrayHabilidades.forEach((habilidad)=>{
+            const li = document.createElement("li");
+            li.textContent = habilidad.ability.name;
+            ulDiv.appendChild(li);
+         });
     }catch(error) {alert("Ocurrio un error")};
 };
