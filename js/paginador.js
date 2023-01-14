@@ -2,16 +2,24 @@ import { obtenerNextPagina, obtenerDetallesPokemon } from "./services.js";
 import { crearDiv } from "./listar-pokemones.js";
 
 const botonNext = document.querySelector("[data-btn-next]");
+const botonPrevious = document.querySelector("[data-btn-previous]");
 const vaciarDiv = document.querySelector("[data-listado]");
 const divContenedorHTML = document.querySelector("[data-listado]");
 
 botonNext.addEventListener("click", ()=>{
     vaciarDiv.innerHTML = "";
-    paginador();
+    paginador(botonNext);
 });
 
-const paginador = () =>{
-    const idPagina = botonNext.id;
+botonPrevious.addEventListener("click", ()=>{
+    if(botonPrevious.id !== ""){
+        vaciarDiv.innerHTML = "";
+        paginador(botonPrevious);
+    }
+});
+
+const paginador = (boton) =>{
+    const idPagina = boton.id;
     obtenerNuevaLista(idPagina);
 }
 
@@ -25,6 +33,13 @@ const obtenerNuevaLista = async (id)=>{
             divContenedorHTML.appendChild(nuevoDiv);
         });
     });
+
+    if(paginaJson.previous === null){
+        botonPrevious.id = "";
+    }else{
+        botonPrevious.id = paginaJson.previous;
+    }
     botonNext.id = paginaJson.next;
 };
+
 
