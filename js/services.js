@@ -16,5 +16,5 @@ const obtenerNextPagina = (next) =>{
 export{
     listarPokemones,
     obtenerDetallesPokemon,
-    obtenerNextPagina
+    obtenerNextPagina,
 };
