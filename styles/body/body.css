@@ -1,10 +1,13 @@
+body{
+    font-family: 'Squad 62', sans-serif;
+}
+
 .body{
     display: flex;
     padding-top: 1.5rem;
     background-color: #2f2f2f;
     justify-content: center;
-    font-family: 'Squad 62', sans-serif;
-    color: rgb(235, 168, 44);
+    color: rgb(255, 145, 0);
 }
 
 /*************************/
@@ -36,7 +39,7 @@
 }
 
 .tarjeta__detalles{
-    color: rgb(235, 168, 44);
+    color: rgb(255, 145, 0);
     font-size: 1.2rem;
     text-decoration: none;
     margin: 0.5rem;
@@ -47,7 +50,7 @@
 .paginador{
     text-align: center;
     margin: 4rem 0rem 4rem 0rem;
-    color: rgb(235, 168, 44);
+    color: rgb(255, 145, 0);
 }
 
 .paginador__opcion, .paginador__opcion__oculto{
@@ -64,7 +67,7 @@
 .paginador__opcion__oculto{
     text-align: center;
     display: none;
-    color: rgb(235, 168, 44);
+    color: rgb(255, 145, 0);
     text-decoration: none;
     width: 350px;
     margin: 1rem auto 6rem auto;
@@ -72,4 +75,29 @@
 
 .paginador__opcion__oculto:hover{
     background: rgb(207, 0, 0);
+}
+
+/********************************************/
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(20, 20, 20);
+    padding: 3rem 0 3rem 0;
+    box-shadow: 0px -3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.footer__contenedor{
+    width: 80px;
+    margin-bottom: 0.5rem;
+}
+
+.footer__contenedor__imagen{
+    width: 100%;
+}
+
+.footer__leyenda{
+    font-size: 0.9rem;
+    color: #979797;
 }

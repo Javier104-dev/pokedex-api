@@ -12,7 +12,6 @@
 .pokemon__descripcion{
     display: flex;
     flex-direction: column;
-    font-weight: 600;
 }
 
 .pokemon__descripcion__item{
