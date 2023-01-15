@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokeapi</title>
+    <link href="https://fonts.cdnfonts.com/css/squad-62" rel="stylesheet">
     <link rel="stylesheet" href="styles/base/reset.css">
     <link rel="stylesheet" href="styles/header/header-imagen.css">
     <link rel="stylesheet" href="styles/body/body.css">
@@ -13,32 +14,22 @@
 <body>
     <header>
         <section class="header">
-            <img class="header__imagen" src="styles/image/pokeapi_256.png" alt="Logo pokeapi">
+            <a href="index.html"><img class="header__imagen" src="styles/image/pokeapi_256.png" alt="Logo pokeapi"></a>
         </section>
     </header>
     <main>
         <div class="body">
-            <nav class="sidebar">
-                <p class="sidebar__item">Categoria</p>
-                <p class="sidebar__item">Categoria</p>
-                <p class="sidebar__item">Categoria</p>
-                <p class="sidebar__item">Categoria</p>
-                <p class="sidebar__item">Categoria</p>
-                <p class="sidebar__item">Categoria</p>
-            </nav>
-            <section class="article">
-
+            <section class="article ">
                 <div class="paginador">
-                    <button class="paginador__opcion" id="" data-btn-previous>Anterior</button>
+                    <span class="paginador__opcion" id="" data-btn-previous>Anterior</span>
                     <span class="paginador__opcion" id="" data-btn-next>Siguiente</span>
                 </div>
-
-                <h1 class="article__titulo">Lista de pokemones:</h1>
-                
                 <div class="listado_tarjetas" data-listado>
                 </div>
-                
                 <div data-detalles>
+                </div>
+                <div>
+                    <a href="index.html" class="paginador__opcion__oculto">Ir a la pagina principal</a>
                 </div>
             </section>
         </div>

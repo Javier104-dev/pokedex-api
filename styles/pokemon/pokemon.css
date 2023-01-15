@@ -1,20 +1,24 @@
 .pokemon{
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    margin-left: 5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem 3rem;
+    background: url(../image/Pokemon-Phone-Wallpapers-4.jpg) center / cover no-repeat;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px black;
 }
 
 .pokemon__descripcion{
     display: flex;
     flex-direction: column;
-    width: 25%;
     font-weight: 600;
 }
 
 .pokemon__descripcion__item{
+    font-weight: 100;
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .pokemon__descripcion__poder{
@@ -23,5 +27,6 @@
 }
 
 .pokemon__imagen{
-    width: 250px;
+    width: 300px;
+    filter: drop-shadow(5px 5px 2px black); 
 }

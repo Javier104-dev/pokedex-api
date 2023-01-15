@@ -28,6 +28,7 @@ const detallarPokemones = async () =>{
             listado.remove();
             contenedorHtml.appendChild(div);
     }catch(error) {alert("Ocurrio un error")};
+    ocultarBotones();
 };
 
 detallarPokemones();
@@ -64,8 +65,16 @@ const obtenerPoderesPokemon = async (nombre, div) => {
         const arrayHabilidades = pokemonSeleccionado.abilities;
         arrayHabilidades.forEach((habilidad)=>{
             const li = document.createElement("li");
+            li.classList.add("pokemon__descripcion__item");
             li.textContent = habilidad.ability.name;
             ulDiv.appendChild(li);
          });
     }catch(error) {alert("Ocurrio un error")};
 };
+
+function ocultarBotones(){
+    const boton = document.querySelector(".paginador");
+    const botonOculto = document.querySelector(".paginador__opcion__oculto");
+    boton.style.display = "none"
+    botonOculto.style.display = "block"
+}
