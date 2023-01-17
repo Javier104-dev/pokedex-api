@@ -1,4 +1,6 @@
-import { listarPokemones, obtenerDetallesPokemon } from "./services.js";
+import { listarPokemones, obtenerDetallesPokemon, obtenerNextPagina } from "./services.js";
+
+const botonNext = document.querySelector("[data-btn-next]");
 
 const crearDiv = (nombre, foto) =>{
     const div = document.createElement("div");
@@ -15,10 +17,15 @@ const crearDiv = (nombre, foto) =>{
 
 const exponerPokemones = async () =>{
     const divContenedorHTML = document.querySelector("[data-listado]");
-    const botonNext = document.querySelector("[data-btn-next]");
+    const urlActual = new URL(window.location).searchParams;
+    
+    if((urlActual.get("offset")) && (urlActual.get("limit"))){
+        return;
+    }
+
     try{
         const listaJSON = await listarPokemones();
-        botonNext.id = listaJSON.next;
+        botonNext.href = modificarUrl(listaJSON.next);
         const listaPokemones = listaJSON.results
         listaPokemones.forEach(({name}) => {
 
@@ -32,5 +39,20 @@ const exponerPokemones = async () =>{
     }catch(error) {alert("Ocurrio un error")};
 };
 
+const modificarUrl = (next) =>{
+    const apiUrl = new URL(next);
+    const parametrosUrl = new URLSearchParams(apiUrl.search);
+    const parametroOff = parametrosUrl.get("offset");
+    const parametroLimit = parametrosUrl.get("limit");
+    
+    const urlActual = new URL(window.location);
+
+    urlActual.searchParams.set("offset", parametroOff);
+    urlActual.searchParams.set("limit", parametroLimit);
+    
+    const nuevaUrl = `${urlActual.origin}${urlActual.pathname}?${urlActual.searchParams}`
+    return nuevaUrl;
+};
+
 exponerPokemones();
-export{crearDiv};
+export{crearDiv, modificarUrl};
