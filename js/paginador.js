@@ -4,11 +4,6 @@ import { crearDiv, modificarUrl } from "./listar-pokemones.js";
 const botonNext = document.querySelector("[data-btn-next]");
 const botonPrevious = document.querySelector("[data-btn-previous]");
 
-botonNext.addEventListener("click", (event)=>{
-    event.preventDefault();
-    window.location = botonNext.href;
-})
-
 const obtenerNuevaLista = async ()=>{
     const divContenedorHTML = document.querySelector("[data-listado]");
     const urlActual = new URL(window.location).searchParams;
@@ -27,14 +22,13 @@ const obtenerNuevaLista = async ()=>{
                 divContenedorHTML.appendChild(nuevoDiv);
             });
         });
-        
-        if(paginaJson.previous === null){
-            botonPrevious.href = "";
+
+        if(urlActual.get("offset") === "20"){
+            botonPrevious.href = "index.html";
         }else{
             botonPrevious.href = modificarUrl(paginaJson.previous);
         }
         botonNext.href = modificarUrl(paginaJson.next);
-        
     }catch(error) {alert("Ocurrio un error")};
 };
 
