@@ -3,14 +3,16 @@ import { obtenerDetallesPokemon} from "./services.js";
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");
 
-const detallarPokemones = async () =>{
-    const url = new URL(window.location);
-    const id = url.searchParams.get("id");
+const verPokemon = () =>{
+    const id = obtenerId();
+    ocultarBotones(id);
+    detallarPokemones(id);
+}
 
-    if(id === null){
+const detallarPokemones = async (id) =>{
+    if(!id){
         return;
     }
-
     try{
         const pokemonSeleccionado = await obtenerDetallesPokemon(id);
             let tipos = [];
@@ -24,38 +26,52 @@ const detallarPokemones = async () =>{
                     tipos.push(tipo.type.name);
                 });
                 const tiposString = tipos.join(", ");
-            const div = crearDiv(nombre, foto, altura, peso, tiposString);
-            listado.remove();
-            contenedorHtml.appendChild(div);
+        const div = crearDiv(nombre, foto, altura, peso, tiposString);
+        listado.remove();
+        contenedorHtml.appendChild(div);
     }catch(error) {alert("Ocurrio un error")};
-    ocultarBotones();
 };
 
-detallarPokemones();
-
 const crearDiv = (nombre, foto, altura, peso, tipo) =>{
-    const div = document.createElement("div");
-    div.classList.add("pokemon");
-    const contenido =
-    `
-    <div class="pokemon__descripcion">
-        <span class="pokemon__descripcion__item">Nombre: ${nombre}</span>
-        <span class="pokemon__descripcion__item">Altura: ${altura}</span>
-        <span class="pokemon__descripcion__item">Peso: ${peso}</span>
-        <span class="pokemon__descripcion__item">Tipo: ${tipo}</span>
-        <span class="pokemon__descripcion__item">Habilidades:</span>
-        <ul class="pokemon__descripcion__poder">
-            
-        </ul>
-    </div>
-    <div>
-        <img class="pokemon__imagen" src="${foto}" alt="Foto Pokemon">
-    </div>
-    `;
+    let classNameSpan = "pokemon__descripcion__item";
 
-    div.innerHTML = contenido;
-    obtenerPoderesPokemon(nombre, div);
-    return div;
+    const divContenedor = crearElemento("div", "pokemon");
+
+        const primerDiv = crearElemento("div", "pokemon__descripcion");
+            const span1 = crearElemento("span", classNameSpan);
+            span1.textContent = `Nombre: ${nombre}`;
+            primerDiv.appendChild(span1);
+
+            const span2 = crearElemento("span", classNameSpan);
+            span2.textContent = `Altura: ${altura}`;
+            primerDiv.appendChild(span2);
+
+            const span3 = crearElemento("span", classNameSpan);
+            span3.textContent = `Peso: ${peso}`;
+            primerDiv.appendChild(span3);
+
+            const span4 = crearElemento("span", classNameSpan);
+            span4.textContent = `Tipo: ${tipo}`;
+            primerDiv.appendChild(span4);
+
+            const span5 = crearElemento("span", classNameSpan);
+            span5.textContent = `Habilidades:`;
+            primerDiv.appendChild(span5);
+
+            const ul = crearElemento("ul", "pokemon__descripcion__poder");
+            primerDiv.appendChild(ul);
+
+        const segundoDiv = crearElemento("div", null);
+            const imagen = crearElemento("img", "pokemon__imagen");;
+            imagen.src = `${foto}`;
+            imagen.alt = `Foto Pokemon`;
+            segundoDiv.appendChild(imagen);
+
+    divContenedor.appendChild(primerDiv);
+    divContenedor.appendChild(segundoDiv);
+
+    obtenerPoderesPokemon(nombre, divContenedor);
+    return divContenedor;
 };
 
 const obtenerPoderesPokemon = async (nombre, div) => {
@@ -72,9 +88,27 @@ const obtenerPoderesPokemon = async (nombre, div) => {
     }catch(error) {alert("Ocurrio un error")};
 };
 
-function ocultarBotones(){
-    const boton = document.querySelector(".paginador");
-    const botonOculto = document.querySelector(".paginador__opcion__oculto");
-    boton.style.display = "none"
-    botonOculto.style.display = "block"
+const obtenerId =()=>{
+    const url = new URL(window.location);
+    const id = url.searchParams.get("id");
+    return id;
 }
+
+function ocultarBotones(id){
+    if(!id){
+        return;
+    }else{
+        const boton = document.querySelector(".paginador");
+        const botonOculto = document.querySelector(".paginador__opcion__oculto");
+        boton.style.display = "none"
+        botonOculto.style.display = "block"
+    }
+}
+
+const crearElemento = (tipoElemento, classList) =>{
+    const elemento = document.createElement(tipoElemento);
+    elemento.classList.add(classList);
+    return elemento;
+}
+
+verPokemon();
