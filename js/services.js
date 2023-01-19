@@ -1,16 +1,18 @@
-const listarPokemones = () => {
-    return fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
-    .then(respuesta => respuesta.json());
+const url = "https://pokeapi.co/api/v2/pokemon";
+
+const listarPokemones = async () => {
+    const respuesta = await fetch(url);
+    return await respuesta.json();
 };
 
-const obtenerDetallesPokemon = (pokemon) =>{
-    return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-    .then(respuesta => respuesta.json());
+const obtenerDetallesPokemon = async (pokemon) =>{
+    const respuesta = await fetch(`${url}/${pokemon}`);
+    return await respuesta.json();
 };
 
-const obtenerNextPagina = (next) =>{
-    return fetch(`${next}`)
-    .then(respuesta => respuesta.json());
+const obtenerNextPagina = async (next) =>{
+    const respuesta = await fetch(`${next}`);
+    return respuesta.json();
 };
 
 export{
@@ -18,3 +20,10 @@ export{
     obtenerDetallesPokemon,
     obtenerNextPagina,
 };
+
+/*
+const listarPokemones = () => {
+    return fetch(url)
+    .then(respuesta => respuesta.json());
+};
+*/

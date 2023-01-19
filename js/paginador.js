@@ -43,7 +43,7 @@ const crearUrl = () =>{
     urlApi.searchParams.set("offset", parametroOff);
     urlApi.searchParams.set("limit", parametroLimit);
     urlApi = `${urlApi.origin}${urlApi.pathname}?${urlApi.searchParams}`
-    
+
     return urlApi
 };
 
