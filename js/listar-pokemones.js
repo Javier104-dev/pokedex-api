@@ -1,43 +1,36 @@
-import { listarPokemones, obtenerDetallesPokemon, obtenerNextPagina } from "./services.js";
+import { listarPokemones, obtenerDetallesPokemon } from "./services.js";
+import { crearTarjetas } from "./crear-div-url.js";
 
 const botonNext = document.querySelector("[data-btn-next]");
+const divContenedorHTML = document.querySelector("[data-listado]");
 
-const crearDiv = (nombre, foto) =>{
-    const div = document.createElement("div");
-    div.classList.add("tarjeta");
-    const contenido =
-    `
-    <img class="tarjeta__foto" src="${foto}" alt="">
-    <span class="tarjeta__nombre">${nombre}</span>
-    <a class="tarjeta__detalles" href="index.html?id=${nombre}">Ver detalles</a>
-    `
-    div.innerHTML = contenido;
-    return div;
+const mostrarPokemones = () =>{
+    const urlActual = obtenerUrlActual();
+    exponerPokemones(urlActual);
 }
 
-const exponerPokemones = async () =>{
-    const divContenedorHTML = document.querySelector("[data-listado]");
-    const urlActual = new URL(window.location).searchParams;
+const exponerPokemones = async (url) =>{
     
-    if((urlActual.get("offset")) && (urlActual.get("limit"))){
+    if((url.get("offset")) && (url.get("limit"))){
         return;
     }
 
     try{
         const listaJSON = await listarPokemones();
-        botonNext.href = modificarUrl(listaJSON.next);
         const listaPokemones = listaJSON.results
         listaPokemones.forEach(({name}) => {
-
-            obtenerDetallesPokemon(name).then(({sprites})=>{
-                const foto = sprites.front_default;
-                const nuevoDiv = crearDiv(name, foto);
-                divContenedorHTML.appendChild(nuevoDiv);
-            });
-            
+            mostrarPokemon(name);
         });
+        botonNext.href = modificarUrl(listaJSON.next);
     }catch(error) {alert("Ocurrio un error")};
 };
+
+const mostrarPokemon = async (nombre) =>{
+    const pokemon = await obtenerDetallesPokemon(nombre);
+    const pokemonFoto = pokemon.sprites.front_default;
+    const nuevoDiv = crearTarjetas(nombre, pokemonFoto);
+    divContenedorHTML.appendChild(nuevoDiv);
+}
 
 const modificarUrl = (next) =>{
     const apiUrl = new URL(next);
@@ -45,14 +38,20 @@ const modificarUrl = (next) =>{
     const parametroOff = parametrosUrl.get("offset");
     const parametroLimit = parametrosUrl.get("limit");
     
-    const urlActual = new URL(window.location);
-
+    let urlActual = new URL(window.location);
+    
     urlActual.searchParams.set("offset", parametroOff);
     urlActual.searchParams.set("limit", parametroLimit);
     
-    const nuevaUrl = `${urlActual.origin}${urlActual.pathname}?${urlActual.searchParams}`
-    return nuevaUrl;
+    urlActual = `${urlActual.origin}${urlActual.pathname}?${urlActual.searchParams}`
+    return urlActual;
 };
 
-exponerPokemones();
-export{crearDiv, modificarUrl};
+const obtenerUrlActual = () =>{
+    const url = new URL (window.location).searchParams;
+    return url;
+}
+
+mostrarPokemones();
+
+export{ modificarUrl, obtenerUrlActual, mostrarPokemon};

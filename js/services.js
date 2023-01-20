@@ -20,10 +20,3 @@ export{
     obtenerDetallesPokemon,
     obtenerNextPagina,
 };
-
-/*
-const listarPokemones = () => {
-    return fetch(url)
-    .then(respuesta => respuesta.json());
-};
-*/
