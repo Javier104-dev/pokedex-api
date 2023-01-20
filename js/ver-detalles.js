@@ -88,7 +88,7 @@ const obtenerPoderesPokemon = async (nombre, div) => {
     }catch(error) {alert("Ocurrio un error")};
 };
 
-const obtenerId =()=>{
+const obtenerId = () =>{
     const url = new URL(window.location);
     const id = url.searchParams.get("id");
     return id;
