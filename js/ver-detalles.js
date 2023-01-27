@@ -1,5 +1,5 @@
 import { obtenerDetallesPokemon} from "./services.js";
-import { crearTarjetaDetalladas } from "./crear-div-url.js";
+import { crearTarjetaDetalladas } from "./manejar-elementos-html-url.js";
 
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");

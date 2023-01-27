@@ -1,5 +1,6 @@
 import { obtenerDetallesPokemon } from "./services.js";
 
+/******* Funciones para crear elementos HTML *******/
 
 const crearTarjetas = (nombre, foto) =>{
     const div = crearElemento("div", "tarjeta");
@@ -64,6 +65,12 @@ const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo) =>{
     return divContenedor;
 };
 
+const crearElemento = (tipoElemento, classList) =>{
+    const elemento = document.createElement(tipoElemento);
+    elemento.classList.add(classList);
+    return elemento;
+}
+
 const obtenerPoderesPokemon = async (nombre, div) => {
     const ulDiv = div.querySelector(".pokemon__descripcion__poder");
     try{
@@ -77,10 +84,39 @@ const obtenerPoderesPokemon = async (nombre, div) => {
     }catch(error) {alert("Ocurrio un error")};
 };
 
-const crearElemento = (tipoElemento, classList) =>{
-    const elemento = document.createElement(tipoElemento);
-    elemento.classList.add(classList);
-    return elemento;
+/******* Funciones para crear url *******/
+
+const obtenerUrlActual = () =>{
+    const url = new URL (window.location).searchParams;
+    return url;
 }
 
-export { crearTarjetas, crearTarjetaDetalladas, crearElemento };
+const modificarUrlActual = (next) =>{
+    const apiUrl = new URL(next);
+    const parametrosUrl = new URLSearchParams(apiUrl.search);
+    const parametroOff = parametrosUrl.get("offset");
+    const parametroLimit = parametrosUrl.get("limit");
+    
+    let urlActual = new URL(window.location);
+    
+    urlActual.searchParams.set("offset", parametroOff);
+    urlActual.searchParams.set("limit", parametroLimit);
+    
+    urlActual = `${urlActual.origin}${urlActual.pathname}?${urlActual.searchParams}`
+    return urlActual;
+};
+
+const crearUrlApi = () =>{
+    const obtenerParametros = obtenerUrlActual();
+    const parametroOff = obtenerParametros.get("offset");
+    const parametroLimit = obtenerParametros.get("limit");
+
+    let urlApi = new URL("https://pokeapi.co/api/v2/pokemon");
+
+    urlApi.searchParams.set("offset", parametroOff);
+    urlApi.searchParams.set("limit", parametroLimit);
+    urlApi = `${urlApi.origin}${urlApi.pathname}?${urlApi.searchParams}`
+    return urlApi
+};
+
+export { crearTarjetas, crearTarjetaDetalladas, crearElemento, modificarUrlActual, crearUrlApi, obtenerUrlActual };
