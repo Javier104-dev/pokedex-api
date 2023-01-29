@@ -52,7 +52,7 @@ const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo) =>{
             const ul = crearElemento("ul", "pokemon__descripcion__poder");
             primerDiv.appendChild(ul);
 
-        const segundoDiv = crearElemento("div", null);
+        const segundoDiv = crearElemento("div", "pokemon__imagen__contenedor");
             const imagen = crearElemento("img", "pokemon__imagen");;
             imagen.src = `${foto}`;
             imagen.alt = `Foto Pokemon`;
