@@ -108,15 +108,21 @@ const modificarUrlActual = (next) =>{
 
 const crearUrlApi = () =>{
     const obtenerParametros = obtenerUrlActual();
-    const parametroOff = obtenerParametros.get("offset");
-    const parametroLimit = obtenerParametros.get("limit");
+    let urlApi = new URL("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20");
 
-    let urlApi = new URL("https://pokeapi.co/api/v2/pokemon");
+    if((!obtenerParametros.get("offset")) && (!obtenerParametros.get("limit"))){
+        return urlApi;
 
-    urlApi.searchParams.set("offset", parametroOff);
-    urlApi.searchParams.set("limit", parametroLimit);
-    urlApi = `${urlApi.origin}${urlApi.pathname}?${urlApi.searchParams}`
-    return urlApi
+    }else{
+        const parametroOff = obtenerParametros.get("offset");
+        const parametroLimit = obtenerParametros.get("limit");
+
+        urlApi.searchParams.set("offset", parametroOff);
+        urlApi.searchParams.set("limit", parametroLimit);
+        urlApi = `${urlApi.origin}${urlApi.pathname}?${urlApi.searchParams}`
+
+        return urlApi
+    }
 };
 
 export { crearTarjetas, crearTarjetaDetalladas, crearElemento, modificarUrlActual, crearUrlApi, obtenerUrlActual };

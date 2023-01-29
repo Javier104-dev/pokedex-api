@@ -44,7 +44,6 @@ function ocultarBotones(){
     const botonOculto = document.querySelector(".paginador__opcion__oculto");
     boton.style.display = "none"
     botonOculto.style.display = "block"
-
 }
 
 verPokemon();
