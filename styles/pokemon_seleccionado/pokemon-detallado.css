@@ -4,10 +4,12 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
     padding: 2rem 3rem;
-    background: url(../image/Pokemon-Phone-Wallpapers-4.jpg) center / cover no-repeat;
+    background: url(../image/1809899.jpg) center / cover no-repeat;
     border-radius: 8px;
     box-shadow: 5px 5px 10px black;
 }
+
+
 
 .pokemon__descripcion{
     display: flex;
