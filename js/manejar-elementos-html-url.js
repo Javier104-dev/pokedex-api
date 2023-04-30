@@ -1,4 +1,3 @@
-import { obtenerDetallesPokemon } from "./services.js";
 
 /******* Funciones para crear elementos HTML *******/
 
@@ -23,7 +22,7 @@ const crearTarjetas = (nombre, foto) =>{
     return div;
 }
 
-const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo) =>{
+const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo, jsonPokemon) =>{
     let classNameSpan = "pokemon__descripcion__item";
 
     const divContenedor = crearElemento("div", "pokemon");
@@ -61,7 +60,7 @@ const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo) =>{
     divContenedor.appendChild(primerDiv);
     divContenedor.appendChild(segundoDiv);
 
-    obtenerPoderesPokemon(nombre, divContenedor);
+    obtenerPoderesPokemon(jsonPokemon, divContenedor);
     return divContenedor;
 };
 
@@ -71,11 +70,10 @@ const crearElemento = (tipoElemento, classList) =>{
     return elemento;
 }
 
-const obtenerPoderesPokemon = async (nombre, div) => {
+const obtenerPoderesPokemon = (jsonPokemon, div) => {
     const ulDiv = div.querySelector(".pokemon__descripcion__poder");
     try{
-        const pokemonSeleccionado = await obtenerDetallesPokemon(nombre);
-        const arrayHabilidades = pokemonSeleccionado.abilities;
+        const arrayHabilidades = jsonPokemon.abilities;
         arrayHabilidades.forEach((habilidad)=>{
             const li = crearElemento("li", "pokemon__descripcion__item");
             li.textContent = habilidad.ability.name;

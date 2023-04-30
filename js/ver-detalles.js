@@ -1,4 +1,4 @@
-import { obtenerDetallesPokemon} from "./services.js";
+import { obtenerPokemon} from "./services.js";
 import { crearTarjetaDetalladas } from "./manejar-elementos-html-url.js";
 
 const contenedorHtml = document.querySelector("[data-detalles]");
@@ -14,7 +14,8 @@ const verPokemon = () =>{
 
 const detallarPokemones = async (id) =>{
     try{
-        const pokemonSeleccionado = await obtenerDetallesPokemon(id);
+        const pokemonSeleccionado = await obtenerPokemon(id);
+
             let tipos = [];
 
             const nombre = pokemonSeleccionado.name;
@@ -27,7 +28,7 @@ const detallarPokemones = async (id) =>{
                 });
                 const tiposString = tipos.join(", ");
         
-        const div = crearTarjetaDetalladas(nombre, foto, altura, peso, tiposString);
+        const div = crearTarjetaDetalladas(nombre, foto, altura, peso, tiposString, pokemonSeleccionado);
         listado.remove();
         contenedorHtml.appendChild(div);
     }catch(error) {alert("Ocurrio un error")};

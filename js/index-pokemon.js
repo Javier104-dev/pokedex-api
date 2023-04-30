@@ -1,4 +1,4 @@
-import { listarPokemones, obtenerDetallesPokemon} from "./services.js";
+import { obtenerDetallesPokemon, obtenerPokemones} from "./services.js";
 import { crearTarjetas, modificarUrlActual, obtenerUrlActual, crearUrlApi } from "./manejar-elementos-html-url.js";
 
 const botonNext = document.querySelector("[data-btn-next]");
@@ -6,26 +6,24 @@ const botonPrevious = document.querySelector("[data-btn-previous]");
 const divContenedorHTML = document.querySelector("[data-listado]");
 
 const mostrarPokemones = () =>{
-    const url = crearUrlApi();
-    exponerPokemones(url);
+    exponerPokemones(crearUrlApi());
 };
 
 const exponerPokemones = async (urlApi) =>{
     try{
-        const listaJSON = await listarPokemones(urlApi);
-        const listaPokemones = listaJSON.results;
-        listaPokemones.forEach(({name}) => {
-            mostrarPokemon(name);
-        });
+        const listaJSON = await obtenerPokemones(urlApi);
+        const listaPromesas = listaJSON.results.map(pokemon => obtenerDetallesPokemon(pokemon.name));
+        const listaPromesasResueltas = await Promise.all(listaPromesas);
+        listaPromesasResueltas.forEach(pokemon =>{
+            mostrarPokemon(pokemon.name, pokemon.sprites.front_default);
+        })
         paginador(listaJSON);
         
     }catch(error) {alert("Ocurrio un error")};
 };
 
-const mostrarPokemon = async (nombre) =>{
-    const pokemon = await obtenerDetallesPokemon(nombre);
-    const pokemonFoto = pokemon.sprites.front_default;
-    const nuevoDiv = crearTarjetas(nombre, pokemonFoto);
+const mostrarPokemon = (nombre, foto) =>{
+    const nuevoDiv = crearTarjetas(nombre, foto);
     divContenedorHTML.appendChild(nuevoDiv);
 };
 
