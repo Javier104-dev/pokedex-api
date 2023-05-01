@@ -17,7 +17,7 @@ export{
 };
 
 
-/////////////////////////////////////////storage
+/******************** Crear keys para el localStorage *******************************/
 
 const crearLlavePokemon = (id) =>{
     return `pokemon_${id}`;
@@ -31,6 +31,7 @@ const crearLlavePokemones = (urlApi) =>{
     return `pokemones_${parametro1}_${parametro2}`;
 }
 
+/******************** Obtener datos del localStorage *******************************/
 
 const obtenerPokemonStorage = (id) =>{
     const pokemonJson = JSON.parse(localStorage.getItem(crearLlavePokemon(id)));
@@ -52,6 +53,7 @@ const obtenerPokemonesStorage = (url) =>{
     return pokemonesJson;
 }
 
+/******************** Guardar datos en el localStorage *******************************/
 
 const guardarPokemonStorage = (id, pokemon) =>{
 
@@ -70,7 +72,7 @@ const guardarPokemonesStorage = (urlApi, pokemones) =>{
 }
 
 
-//////////////////////////////////////////////////////// interceptor
+/******************** Intermediario entre el localStorage y la API *******************************/
 
 const obtenerPokemon = async (id) =>{
     try{

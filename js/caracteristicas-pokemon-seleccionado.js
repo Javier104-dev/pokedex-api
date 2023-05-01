@@ -9,18 +9,20 @@ const listado = document.querySelector("[data-listado]");
 const detallarPokemones = async (id) =>{
     try{
         const pokemonSeleccionado = await obtenerPokemon(id);
-
             let tipos = [];
 
-            const nombre = pokemonSeleccionado.name;
-            const foto = pokemonSeleccionado.sprites.front_default;
-            const altura = pokemonSeleccionado.height;
-            const peso = pokemonSeleccionado.weight
-            const types = pokemonSeleccionado.types;
-                types.forEach((tipo)=>{
-                    tipos.push(tipo.type.name);
-                });
-                const tiposString = tipos.join(", ");
+            const {
+                name: nombre,
+                sprites: {front_default: foto}, //Para acceder a un objeto dentro de otro objeto usamos {} para poder desestructurar un objeto
+                height: altura,
+                weight: peso,
+                types: tipoPoderes,
+            } = pokemonSeleccionado;
+
+            tipoPoderes.forEach((tipo)=>{
+                tipos.push(tipo.type.name);
+            });
+            const tiposString = tipos.join(", ");
         
         const div = crearTarjetaDetalladas(nombre, foto, altura, peso, tiposString, pokemonSeleccionado);
         listado.remove();
