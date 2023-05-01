@@ -1,13 +1,10 @@
 import { obtenerDetallesPokemon, obtenerPokemones} from "./services.js";
-import { crearTarjetas, modificarUrlActual, obtenerUrlActual, crearUrlApi } from "./manejar-elementos-html-url.js";
+import { crearTarjetas, modificarUrlActual, obtenerUrlActual } from "./manejar-elementos-html-url.js";
 
 const botonNext = document.querySelector("[data-btn-next]");
 const botonPrevious = document.querySelector("[data-btn-previous]");
 const divContenedorHTML = document.querySelector("[data-listado]");
 
-const mostrarPokemones = () =>{
-    exponerPokemones(crearUrlApi());
-};
 
 const exponerPokemones = async (urlApi) =>{
     try{
@@ -43,4 +40,6 @@ const paginador = (apiJson) =>{
     }
 };
 
-mostrarPokemones();
+export {
+    exponerPokemones,
+}

@@ -23,8 +23,12 @@ const crearLlavePokemon = (id) =>{
     return `pokemon_${id}`;
 }
 
-const crearLlavePokemones = (urlKey) =>{
-    return `pokemones_${urlKey}`;
+const crearLlavePokemones = (urlApi) =>{
+    const url = new URL(urlApi)
+    const parametro1 = url.searchParams.get("offset");
+    const parametro2 = url.searchParams.get("limit");
+
+    return `pokemones_${parametro1}_${parametro2}`;
 }
 
 
@@ -39,7 +43,7 @@ const obtenerPokemonStorage = (id) =>{
 }
 
 const obtenerPokemonesStorage = (url) =>{
-    const pokemonesJson = JSON.parse(localStorage.getItem(crearLlavePokemones(url)));
+    const pokemonesJson = JSON.parse(localStorage.getItem(crearLlavePokemones(id)));
     
     if(pokemonesJson === null) {
         throw new Error(`Fallo al obtener datos de localstorage`);
@@ -47,7 +51,6 @@ const obtenerPokemonesStorage = (url) =>{
     
     return pokemonesJson;
 }
-
 
 
 const guardarPokemonStorage = (id, pokemon) =>{

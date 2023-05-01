@@ -123,4 +123,21 @@ const crearUrlApi = () =>{
     }
 };
 
-export { crearTarjetas, crearTarjetaDetalladas, crearElemento, modificarUrlActual, crearUrlApi, obtenerUrlActual };
+/******* Ocultar botones cuando seleccionamos un pokemon *******/
+
+const ocultarBotones = () => {
+    const boton = document.querySelector(".paginador");
+    const botonOculto = document.querySelector(".paginador__opcion__oculto");
+    boton.style.display = "none"
+    botonOculto.style.display = "block"
+}
+
+export { 
+    crearTarjetas, 
+    crearTarjetaDetalladas, 
+    crearElemento, 
+    modificarUrlActual, 
+    crearUrlApi, 
+    obtenerUrlActual, 
+    ocultarBotones 
+};

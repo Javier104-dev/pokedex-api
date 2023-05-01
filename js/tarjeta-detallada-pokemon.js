@@ -4,13 +4,7 @@ import { crearTarjetaDetalladas } from "./manejar-elementos-html-url.js";
 const contenedorHtml = document.querySelector("[data-detalles]");
 const listado = document.querySelector("[data-listado]");
 
-const verPokemon = () =>{
-    const id = obtenerId();
-    if(id){
-        ocultarBotones();
-        detallarPokemones(id);
-    }
-};
+
 
 const detallarPokemones = async (id) =>{
     try{
@@ -40,11 +34,7 @@ const obtenerId = () =>{
     return id;
 }
 
-function ocultarBotones(){
-    const boton = document.querySelector(".paginador");
-    const botonOculto = document.querySelector(".paginador__opcion__oculto");
-    boton.style.display = "none"
-    botonOculto.style.display = "block"
+export {
+    obtenerId,
+    detallarPokemones
 }
-
-verPokemon();
