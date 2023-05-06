@@ -1,4 +1,3 @@
-
 /******* Funciones para crear elementos HTML *******/
 
 const crearTarjetas = (nombre, foto) =>{
