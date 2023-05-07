@@ -8,13 +8,13 @@ const divContenedorHTML = document.querySelector("[data-listado]");
 
 const exponerPokemones = async (urlApi) =>{
     try{
-        const listaJSON = await obtenerPokemones(urlApi);
-        const listaPromesas = listaJSON.results.map(pokemon => obtenerDetallesPokemon(pokemon.name));
+        const { pokemones, anterior, siguiente } = await obtenerPokemones(urlApi);
+        const listaPromesas = pokemones.map(pokemon => obtenerDetallesPokemon(pokemon));
         const listaPromesasResueltas = await Promise.all(listaPromesas);
-        listaPromesasResueltas.forEach(pokemon =>{
-            mostrarPokemon(pokemon.name, pokemon.sprites.front_default);
-        })
-        paginador(listaJSON);
+            listaPromesasResueltas.forEach(pokemon =>{
+                mostrarPokemon(pokemon.name, pokemon.sprites.front_default);
+            })
+        paginador(anterior, siguiente);
         
     }catch(error) {alert("Ocurrio un error")};
 };
@@ -24,15 +24,15 @@ const mostrarPokemon = (nombre, foto) =>{
     divContenedorHTML.appendChild(nuevoDiv);
 };
 
-const paginador = (apiJson) =>{
+const paginador = (pagAnterior, pagSiguiente) =>{
     const url = obtenerUrlActual();
 
-    if(!apiJson.previous){
-        botonNext.href = modificarUrlActual(apiJson.next);
+    if(!pagAnterior){
+        botonNext.href = modificarUrlActual(pagSiguiente);
 
     }else{
-        botonNext.href = modificarUrlActual(apiJson.next);
-        botonPrevious.href = modificarUrlActual(apiJson.previous);
+        botonNext.href = modificarUrlActual(pagSiguiente);
+        botonPrevious.href = modificarUrlActual(pagAnterior);
 
         if(url.get("offset") === "20"){
             botonPrevious.href = "index.html";

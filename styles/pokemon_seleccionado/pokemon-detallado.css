@@ -22,7 +22,7 @@
     margin-bottom: 1rem;
 }
 
-.pokemon__descripcion__poder{
+.pokemon__descripcion__poder, .pokemon__descripcion__tipo{
     margin-left: 2rem;
     font-size: 2rem;
 }

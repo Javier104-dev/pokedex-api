@@ -21,8 +21,9 @@ const crearTarjetas = (nombre, foto) =>{
     return div;
 }
 
-const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo, jsonPokemon) =>{
-    let classNameSpan = "pokemon__descripcion__item";
+const crearTarjetaDetalladas = (foto, nombre, altura, peso, tipo, hablidades) =>{
+
+    const classNameSpan = "pokemon__descripcion__item";
 
     const divContenedor = crearElemento("div", "pokemon");
 
@@ -40,15 +41,16 @@ const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo, jsonPokemon) =
             primerDiv.appendChild(span3);
 
             const span4 = crearElemento("span", classNameSpan);
-            span4.textContent = `Tipo: ${tipo}`;
+            span4.textContent = `Tipo:`;
             primerDiv.appendChild(span4);
+
+            primerDiv.appendChild(crearElemento("ul", "pokemon__descripcion__tipo"));
 
             const span5 = crearElemento("span", classNameSpan);
             span5.textContent = `Habilidades:`;
             primerDiv.appendChild(span5);
 
-            const ul = crearElemento("ul", "pokemon__descripcion__poder");
-            primerDiv.appendChild(ul);
+            primerDiv.appendChild(crearElemento("ul", "pokemon__descripcion__poder"));
 
         const segundoDiv = crearElemento("div", "pokemon__imagen__contenedor");
             const imagen = crearElemento("img", "pokemon__imagen");;
@@ -59,7 +61,8 @@ const crearTarjetaDetalladas = (nombre, foto, altura, peso, tipo, jsonPokemon) =
     divContenedor.appendChild(primerDiv);
     divContenedor.appendChild(segundoDiv);
 
-    obtenerPoderesPokemon(jsonPokemon, divContenedor);
+    obtenerPoderesPokemon(hablidades, divContenedor, ".pokemon__descripcion__poder");
+    obtenerPoderesPokemon(tipo, divContenedor, ".pokemon__descripcion__tipo");
     return divContenedor;
 };
 
@@ -69,16 +72,14 @@ const crearElemento = (tipoElemento, classList) =>{
     return elemento;
 }
 
-const obtenerPoderesPokemon = (jsonPokemon, div) => {
-    const ulDiv = div.querySelector(".pokemon__descripcion__poder");
-    try{
-        const arrayHabilidades = jsonPokemon.abilities;
-        arrayHabilidades.forEach((habilidad)=>{
-            const li = crearElemento("li", "pokemon__descripcion__item");
-            li.textContent = habilidad.ability.name;
-            ulDiv.appendChild(li);
-         });
-    }catch(error) {alert("Ocurrio un error")};
+const obtenerPoderesPokemon = (hablidades, div, ul) => {
+    const ulDiv = div.querySelector(ul);
+
+    hablidades.forEach((habilidad)=>{
+        const li = crearElemento("li", "pokemon__descripcion__item");
+        li.textContent = habilidad;
+        ulDiv.appendChild(li);
+        });
 };
 
 /******* Funciones para crear url *******/

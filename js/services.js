@@ -1,3 +1,5 @@
+import { mapearPokemon, mapearPagina } from "./mapeado.js";
+
 const url = "https://pokeapi.co/api/v2/pokemon";
 
 const listarPokemones = async (next) =>{
@@ -31,7 +33,9 @@ const crearLlavePokemones = (urlApi) =>{
     return `pokemones_${parametro1}_${parametro2}`;
 }
 
+
 /******************** Obtener datos del localStorage *******************************/
+
 
 const obtenerPokemonStorage = (id) =>{
     const pokemonJson = JSON.parse(localStorage.getItem(crearLlavePokemon(id)));
@@ -44,7 +48,7 @@ const obtenerPokemonStorage = (id) =>{
 }
 
 const obtenerPokemonesStorage = (url) =>{
-    const pokemonesJson = JSON.parse(localStorage.getItem(crearLlavePokemones(id)));
+    const pokemonesJson = JSON.parse(localStorage.getItem(crearLlavePokemones(url)));
     
     if(pokemonesJson === null) {
         throw new Error(`Fallo al obtener datos de localstorage`);
@@ -53,11 +57,13 @@ const obtenerPokemonesStorage = (url) =>{
     return pokemonesJson;
 }
 
+
 /******************** Guardar datos en el localStorage *******************************/
+
 
 const guardarPokemonStorage = (id, pokemon) =>{
 
-    if (id === null || typeof(pokemon) !== "object") {
+    if (id === null || typeof pokemon !== "object") {
         throw new Error(`Se necesita un limite y una lista de pokemones`);
     }
 
@@ -65,7 +71,7 @@ const guardarPokemonStorage = (id, pokemon) =>{
 }
 
 const guardarPokemonesStorage = (urlApi, pokemones) =>{
-    if (urlApi === null || typeof(pokemones) !== "object") {
+    if (urlApi === null || typeof pokemones  !== "object") {
         throw new Error(`Se necesita un limite y una lista de pokemones`);
     }
     localStorage.setItem(crearLlavePokemones(urlApi), JSON.stringify(pokemones));
@@ -74,24 +80,28 @@ const guardarPokemonesStorage = (urlApi, pokemones) =>{
 
 /******************** Intermediario entre el localStorage y la API *******************************/
 
+
 const obtenerPokemon = async (id) =>{
     try{
         return obtenerPokemonStorage(id);
 
     } catch (e){
         const pokemonJson = await obtenerDetallesPokemon(id);
-        guardarPokemonStorage(id, pokemonJson);
-        return pokemonJson;
+        const instanciaPokemon = mapearPokemon(pokemonJson)
+        guardarPokemonStorage(id, instanciaPokemon);
+        return instanciaPokemon;
     }
 }
-
 
 const obtenerPokemones = async (url) =>{
     try{
         return obtenerPokemonesStorage(url);
+
     } catch (e){
+
         const pokemonesJson = await listarPokemones(url);
-        guardarPokemonesStorage(url, pokemonesJson);
-        return pokemonesJson;
+        const instanciaPokemones = mapearPagina(pokemonesJson)
+        guardarPokemonesStorage(url, instanciaPokemones);
+        return instanciaPokemones;
     }
 }
