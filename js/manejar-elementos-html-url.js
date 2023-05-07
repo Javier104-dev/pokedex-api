@@ -1,5 +1,12 @@
 /******* Funciones para crear elementos HTML *******/
 
+const divContenedorHTML = document.querySelector("[data-listado]");
+
+const mostrarPokemon = (nombre, foto) =>{
+    const nuevoDiv = crearTarjetas(nombre, foto);
+    divContenedorHTML.appendChild(nuevoDiv);
+};
+
 const crearTarjetas = (nombre, foto) =>{
     const div = crearElemento("div", "tarjeta");
 
@@ -61,8 +68,8 @@ const crearTarjetaDetalladas = (foto, nombre, altura, peso, tipo, hablidades) =>
     divContenedor.appendChild(primerDiv);
     divContenedor.appendChild(segundoDiv);
 
-    obtenerPoderesPokemon(hablidades, divContenedor, ".pokemon__descripcion__poder");
     obtenerPoderesPokemon(tipo, divContenedor, ".pokemon__descripcion__tipo");
+    obtenerPoderesPokemon(hablidades, divContenedor, ".pokemon__descripcion__poder");
     return divContenedor;
 };
 
@@ -139,5 +146,6 @@ export {
     modificarUrlActual, 
     crearUrlApi, 
     obtenerUrlActual, 
-    ocultarBotones 
+    ocultarBotones,
+    mostrarPokemon
 };

@@ -64,7 +64,7 @@ const obtenerPokemonesStorage = (url) =>{
 const guardarPokemonStorage = (id, pokemon) =>{
 
     if (id === null || typeof pokemon !== "object") {
-        throw new Error(`Se necesita un limite y una lista de pokemones`);
+        throw new Error(`Fallo al intentar guardar los datos en localStorage`);
     }
 
     localStorage.setItem(crearLlavePokemon(id), JSON.stringify(pokemon));
@@ -72,7 +72,7 @@ const guardarPokemonStorage = (id, pokemon) =>{
 
 const guardarPokemonesStorage = (urlApi, pokemones) =>{
     if (urlApi === null || typeof pokemones  !== "object") {
-        throw new Error(`Se necesita un limite y una lista de pokemones`);
+        throw new Error(`Fallo al intentar guardar los datos en localStorage`);
     }
     localStorage.setItem(crearLlavePokemones(urlApi), JSON.stringify(pokemones));
 }

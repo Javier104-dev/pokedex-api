@@ -1,12 +1,9 @@
 import { obtenerDetallesPokemon, obtenerPokemones} from "./services.js";
-import { crearTarjetas, modificarUrlActual, obtenerUrlActual } from "./manejar-elementos-html-url.js";
-
-const botonNext = document.querySelector("[data-btn-next]");
-const botonPrevious = document.querySelector("[data-btn-previous]");
-const divContenedorHTML = document.querySelector("[data-listado]");
+import { mostrarPokemon, modificarUrlActual, obtenerUrlActual } from "./manejar-elementos-html-url.js";
 
 
 const exponerPokemones = async (urlApi) =>{
+    
     try{
         const { pokemones, anterior, siguiente } = await obtenerPokemones(urlApi);
         const listaPromesas = pokemones.map(pokemon => obtenerDetallesPokemon(pokemon));
@@ -16,15 +13,13 @@ const exponerPokemones = async (urlApi) =>{
             })
         paginador(anterior, siguiente);
         
-    }catch(error) {alert("Ocurrio un error")};
-};
-
-const mostrarPokemon = (nombre, foto) =>{
-    const nuevoDiv = crearTarjetas(nombre, foto);
-    divContenedorHTML.appendChild(nuevoDiv);
+    }catch(error) {alert("Ocurrio un error3")};
 };
 
 const paginador = (pagAnterior, pagSiguiente) =>{
+    const botonNext = document.querySelector("[data-btn-next]");
+    const botonPrevious = document.querySelector("[data-btn-previous]");
+
     const url = obtenerUrlActual();
 
     if(!pagAnterior){

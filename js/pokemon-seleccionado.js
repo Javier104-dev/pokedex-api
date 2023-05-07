@@ -1,11 +1,9 @@
 import { obtenerPokemon} from "./services.js";
 import { crearTarjetaDetalladas } from "./manejar-elementos-html-url.js";
 
-const contenedorHtml = document.querySelector("[data-detalles]");
-const listado = document.querySelector("[data-listado]");
-
-
 const detallarPokemones = async (id) =>{
+    const contenedorHtml = document.querySelector("[data-detalles]");
+    const listado = document.querySelector("[data-listado]");
 
     try{
         const { foto, nombre, altura, peso, tipo, habilidades} = await obtenerPokemon(id);
