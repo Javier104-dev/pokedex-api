@@ -1,5 +1,5 @@
-import { obtenerPokemon} from "./services.js";
-import { crearTarjetaDetalladas } from "./manejar-elementos-html-url.js";
+import { obtenerPokemon} from "./manipular-api-storage.js";
+import { crearTarjetaDetalladas } from "./manipular-html-url.js";
 
 const detallarPokemones = async (id) =>{
     const contenedorHtml = document.querySelector("[data-detalles]");

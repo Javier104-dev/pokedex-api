@@ -1,5 +1,5 @@
 import { exponerPokemones } from "./exponer-pokemones.js";
-import { crearUrlApi, ocultarBotones } from "./manejar-elementos-html-url.js";
+import { crearUrlApi, ocultarBotones } from "./manipular-html-url.js";
 import { obtenerId, detallarPokemones } from "./pokemon-seleccionado.js";
 
 

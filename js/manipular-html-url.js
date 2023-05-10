@@ -1,10 +1,8 @@
 /******* Funciones para crear elementos HTML *******/
 
-const divContenedorHTML = document.querySelector("[data-listado]");
-
-const mostrarPokemon = (nombre, foto) =>{
+const mostrarPokemon = (nombre, foto, contenedor) =>{
     const nuevoDiv = crearTarjetas(nombre, foto);
-    divContenedorHTML.appendChild(nuevoDiv);
+    contenedor.appendChild(nuevoDiv);
 };
 
 const crearTarjetas = (nombre, foto) =>{

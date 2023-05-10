@@ -1,24 +1,3 @@
-import { mapearPokemon, mapearPagina } from "./mapeado.js";
-
-const url = "https://pokeapi.co/api/v2/pokemon";
-
-const listarPokemones = async (next) =>{
-    const respuesta = await fetch(`${next}`);
-    return respuesta.json();
-};
-
-const obtenerDetallesPokemon = async (pokemon) =>{
-    const respuesta = await fetch(`${url}/${pokemon}`);
-    return await respuesta.json();
-};
-
-export{
-    obtenerDetallesPokemon,
-    obtenerPokemon,
-    obtenerPokemones
-};
-
-
 /******************** Crear keys para el localStorage *******************************/
 
 const crearLlavePokemon = (id) =>{
@@ -77,31 +56,9 @@ const guardarPokemonesStorage = (urlApi, pokemones) =>{
     localStorage.setItem(crearLlavePokemones(urlApi), JSON.stringify(pokemones));
 }
 
-
-/******************** Intermediario entre el localStorage y la API *******************************/
-
-
-const obtenerPokemon = async (id) =>{
-    try{
-        return obtenerPokemonStorage(id);
-
-    } catch (e){
-        const pokemonJson = await obtenerDetallesPokemon(id);
-        const instanciaPokemon = mapearPokemon(pokemonJson)
-        guardarPokemonStorage(id, instanciaPokemon);
-        return instanciaPokemon;
-    }
-}
-
-const obtenerPokemones = async (url) =>{
-    try{
-        return obtenerPokemonesStorage(url);
-
-    } catch (e){
-
-        const pokemonesJson = await listarPokemones(url);
-        const instanciaPokemones = mapearPagina(pokemonesJson)
-        guardarPokemonesStorage(url, instanciaPokemones);
-        return instanciaPokemones;
-    }
+export {
+    guardarPokemonesStorage,
+    guardarPokemonStorage,
+    obtenerPokemonStorage,
+    obtenerPokemonesStorage
 }

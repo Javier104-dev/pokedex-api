@@ -1,19 +1,20 @@
-import { obtenerDetallesPokemon, obtenerPokemones} from "./services.js";
-import { mostrarPokemon, modificarUrlActual, obtenerUrlActual } from "./manejar-elementos-html-url.js";
+import { obtenerCaracteristicasPokemon } from "./api.js";
+import { obtenerPokemones} from "./manipular-api-storage.js";
+import { mostrarPokemon,modificarUrlActual, obtenerUrlActual } from "./manipular-html-url.js";
 
 
 const exponerPokemones = async (urlApi) =>{
-    
+    const divContenedorHTML = document.querySelector("[data-listado]");
     try{
         const { pokemones, anterior, siguiente } = await obtenerPokemones(urlApi);
-        const listaPromesas = pokemones.map(pokemon => obtenerDetallesPokemon(pokemon));
+        const listaPromesas = pokemones.map(pokemon => obtenerCaracteristicasPokemon(pokemon));
         const listaPromesasResueltas = await Promise.all(listaPromesas);
             listaPromesasResueltas.forEach(pokemon =>{
-                mostrarPokemon(pokemon.name, pokemon.sprites.front_default);
+                mostrarPokemon(pokemon.name, pokemon.sprites.front_default, divContenedorHTML);
             })
         paginador(anterior, siguiente);
         
-    }catch(error) {alert("Ocurrio un error3")};
+    }catch(error) {alert("Ocurrio un error")};
 };
 
 const paginador = (pagAnterior, pagSiguiente) =>{
