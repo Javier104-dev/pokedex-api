@@ -9,6 +9,7 @@ const obtenerPokemon = async (id) =>{
         return obtenerPokemonStorage(id);
 
     } catch (e){
+        
         const pokemonJson = await obtenerCaracteristicasPokemon(id);
         const instanciaPokemon = mapearPokemon(pokemonJson)
         guardarPokemonStorage(id, instanciaPokemon);

@@ -90,8 +90,7 @@ const obtenerPoderesPokemon = (hablidades, div, ul) => {
 /******* Funciones para crear url *******/
 
 const obtenerUrlActual = () =>{
-    const url = new URL (window.location).searchParams;
-    return url;
+    return new URL (window.location).searchParams;
 }
 
 const modificarUrlActual = (next) =>{

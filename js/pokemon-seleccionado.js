@@ -1,12 +1,11 @@
-import { obtenerPokemon} from "./manipular-api-storage.js";
 import { crearTarjetaDetalladas } from "./manipular-html-url.js";
 
-const detallarPokemones = async (id) =>{
+const detallarPokemones = async (callback) =>{
     const contenedorHtml = document.querySelector("[data-detalles]");
     const listado = document.querySelector("[data-listado]");
 
     try{
-        const { foto, nombre, altura, peso, tipo, habilidades} = await obtenerPokemon(id);
+        const { foto, nombre, altura, peso, tipo, habilidades} = await callback;
         const div = crearTarjetaDetalladas(foto, nombre, altura, peso, tipo, habilidades);
         listado.remove();
         contenedorHtml.appendChild(div);
