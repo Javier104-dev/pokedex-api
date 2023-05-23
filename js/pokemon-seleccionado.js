@@ -1,11 +1,11 @@
 import { crearTarjetaDetalladas } from "./manipular-html-url.js";
 
-const detallarPokemones = async (callback) =>{
+const detallarPokemones = async (pokemonSelecionado) =>{
     const contenedorHtml = document.querySelector("[data-detalles]");
     const listado = document.querySelector("[data-listado]");
 
     try{
-        const { foto, nombre, altura, peso, tipo, habilidades} = await callback;
+        const { foto, nombre, altura, peso, tipo, habilidades} = await pokemonSelecionado;
         const div = crearTarjetaDetalladas(foto, nombre, altura, peso, tipo, habilidades);
         listado.remove();
         contenedorHtml.appendChild(div);

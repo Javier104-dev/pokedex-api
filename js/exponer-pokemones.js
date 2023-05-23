@@ -2,10 +2,10 @@ import { obtenerCaracteristicasPokemon } from "./api.js";
 import { mostrarPokemon,modificarUrlActual, obtenerUrlActual } from "./manipular-html-url.js";
 
 
-const exponerPokemones = async (callback) =>{
+const exponerPokemones = async (listaDePokemones) =>{
     const divContenedorHTML = document.querySelector("[data-listado]");
     try{
-        const { pokemones, anterior, siguiente } = await callback;
+        const { pokemones, anterior, siguiente } = await listaDePokemones;
         const listaPromesas = pokemones.map(pokemon => obtenerCaracteristicasPokemon(pokemon));
         const listaPromesasResueltas = await Promise.all(listaPromesas);
             listaPromesasResueltas.forEach(pokemon =>{
