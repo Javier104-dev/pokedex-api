@@ -86,6 +86,6 @@ Usamos Live Server para facilitar el trabajo y ver los cambios en tiempo real al
 
 ---
 
-### Autor:
+### Autor
 | [<img src='https://avatars.githubusercontent.com/u/105408069?v=4' width=115><br><sub>Javier Anibal Villca</sub>](https://github.com/Javier104-dev) |
 | :------------------------------------------------------------------------------------------------------------------------------------------------: |
