@@ -16,7 +16,7 @@ Los caracteristicas a destacar son las siguientes:
 | Abstracción y encapsulamiento | El proyecto se enfocó en el uso de `clases` para filtrar la información proveniente de la API. Todo el código está estructurado en torno a esta clase y sus propiedades, lo que permite una modularidad mayor. Esto evita que el código sea dependiente de la API, si sufre algún cambio o si se debe cambiar, solamente se deberá cambiar la implementación de esa clase |
 | Almacenamiento local de datos| La página utiliza el `Local storage` para almacenar los datos filtrados de la API, así se evita hacer peticiones innecesarias y mejora el rendimiento de la página significativamente |
 
-### Especificaciones:
+### Especificaciones
 - API utilizada: https://pokeapi.co/
 - Versión: 0.1.0
 - Diseño responsivo
@@ -29,20 +29,20 @@ Para visitar la página clic en el enlace.
 
 <h2 align='center'>Requisitos del proyecto</h2>
 
-### Requisitos:
+### Requisitos
 - Utilizar la API https://pokeapi.co/ para crear la página.
 - Usar los métodos `async` y `await` para trabajar con las promesas.
 
 <h2 align='center'>Instrucciones de instalación</h2>
 
-### Requerimientos:
+### Requerimientos
 - IDE - Visual Studio Code v1.84.2
 - Git v2.43.0
 - Extensión Live Server
 
 Usamos Live Server para facilitar el trabajo y ver los cambios en tiempo real al realizar el mantenimiento del código, también para no tener que instalar una dependencia.
 
-### Preparando el ambiente:
+### Preparando el ambiente
 - Descargar o clonar el repositorio.
 - Instalar la Extensión [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) para visualizar el `index.html`.
 - Abrir el archivo `index.html`, que se encuentra en la raíz del proyecto, usando Live Server.
